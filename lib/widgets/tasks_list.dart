@@ -6,7 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:todo_firebase/screens/add_task.dart';
+import 'package:todo_firebase/screens/images_videos.dart';
 import 'package:todo_firebase/screens/landing_page.dart';
+import 'package:todo_firebase/screens/videos.dart';
 
 import '../models/tasks_model.dart';
 
@@ -24,6 +26,7 @@ class _TasksListState extends State<TasksList> {
   late FirebaseApp app, app1;
   List<Tasks> taskList = [];
   List<String> keyslist = [];
+  
   final FirebaseAuth auth = FirebaseAuth.instance;
   late User user;
 
@@ -69,13 +72,14 @@ class _TasksListState extends State<TasksList> {
         appBar: AppBar(
           title: Text('TodoList'),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 17),
-              child: Text(
-                '${user.email}',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
+            IconButton(onPressed: (){
+              Navigator.pushNamed(
+                                    context, Videos.routeName);
+            }, icon: Icon(Icons.video_call)),
+            IconButton(onPressed: (){
+              Navigator.pushNamed(
+                                    context, ImagesVideos.routeName);
+            }, icon: Icon(Icons.photo)),
             IconButton(
                 onPressed: () {
                   showDialog(

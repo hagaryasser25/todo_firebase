@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:todo_firebase/screens/add_task.dart';
 import 'package:todo_firebase/screens/auth/login.dart';
 import 'package:todo_firebase/screens/auth/signup.dart';
+import 'package:todo_firebase/screens/images_videos.dart';
 import 'package:todo_firebase/screens/landing_page.dart';
+import 'package:todo_firebase/screens/videos.dart';
 import 'package:todo_firebase/widgets/tasks_list.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  
   runApp(const MyApp());
 }
 
@@ -35,7 +38,10 @@ class MyApp extends StatelessWidget {
         ),
 
         home: FirebaseAuth.instance.currentUser == null 
-        ? const LandingPage(): const TasksList(),
+        ?
+         const LandingPage()
+         : 
+        const TasksList(),
 
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
@@ -43,6 +49,11 @@ class MyApp extends StatelessWidget {
           TasksList.routeName: (ctx) => TasksList(),
           AddTask.routeName: (ctx) => AddTask(),
           LandingPage.routeName: (ctx) => LandingPage(),
+          ImagesVideos.routeName: (ctx) => ImagesVideos(),
+          Videos.routeName: (ctx) => Videos(),
+          
+          
+          
         });
   }
   

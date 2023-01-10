@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ndialog/ndialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_firebase/screens/auth/signup.dart';
 import 'package:todo_firebase/widgets/tasks_list.dart';
 
@@ -46,6 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () async {
                   var email = emailController.text.trim();
                   var password = passwordController.text.trim();
+                  final SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.setString('email', emailController.text);
+
                   if (email.isEmpty || password.isEmpty) {
                     // show error toast
 
@@ -71,16 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     progressDialog.dismiss();
                     if (e.code == 'user-not-found') {
                       Fluttertoast.showToast(msg: 'User not found');
-
                     } else if (e.code == 'wrong-password') {
                       Fluttertoast.showToast(msg: 'Wrong password');
-
                     }
                   } catch (e) {
                     Fluttertoast.showToast(msg: 'Something went wrong');
                     progressDialog.dismiss();
                   }
-
                 },
                 child: Text('Login')),
             SizedBox(height: 10),

@@ -25,15 +25,13 @@ class _LandingPageState extends State<LandingPage>
   late DatabaseReference base, base1;
   late FirebaseDatabase database, database1;
   late FirebaseApp app, app1;
- late String _imageUrl;
- String? url;
+  late String _imageUrl;
+  String? url;
   @override
-  void initState() { 
-   
-     getImage();
-    super.initState();
+  void initState() {
     
-      
+    super.initState();
+
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 20));
     _animation =
@@ -50,19 +48,9 @@ class _LandingPageState extends State<LandingPage>
     _animationController.forward();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    getImage();
-  }
+ 
 
-  void getImage() async {
-  final firebase_storage.FirebaseStorage storage =
-  firebase_storage.FirebaseStorage.instance;
- url = await storage
-    .ref('landingPage.jpeg')
-    .getDownloadURL();
-  }
+ 
 
   @override
   void dispose() {
@@ -75,10 +63,9 @@ class _LandingPageState extends State<LandingPage>
         body: Stack(
       children: [
         CachedNetworkImage(
-          imageUrl:
-              '$url',
+          imageUrl: 'https://img.freepik.com/free-vector/checklist-concept-illustration_114360-479.jpg?w=2000',
           placeholder: ((context, url) => Image.network(
-                '$url',
+                'https://img.freepik.com/free-vector/checklist-concept-illustration_114360-479.jpg?w=2000',
                 fit: BoxFit.cover,
               )),
           errorWidget: (context, url, error) => Icon(Icons.error),
